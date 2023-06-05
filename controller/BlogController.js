@@ -1,5 +1,4 @@
 const BlogPost = require("../model/Blog");
-const Blog = require("../model/Blog");
 
 const getAllBlogs = async (req, res) => {
   try {
@@ -55,9 +54,25 @@ const updateBlogPost = async (req, res) => {
   }
 };
 
+const deleteBlogById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedBlogPost = await BlogPost.findByIdAndDelete(id);
+    if (!deletedBlogPost) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Blog post not found" });
+    }
+    res.status(200).json({ success: true, data: deletedBlogPost });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 module.exports = {
   getAllBlogs,
   createBlogPost,
   getBlogById,
   updateBlogPost,
+  deleteBlogById,
 };
