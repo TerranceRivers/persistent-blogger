@@ -5,14 +5,15 @@ const {
   getAllAuthors,
   createAuthor,
   getAuthorById,
-  updateAuthorById,
-  deleteAuthorById,
+  updateAuthor,
+  deleteAuthor,
 } = require("../controller/AuthorController");
 
 router.get("/all-authors", getAllAuthors);
 router.post("/new-author", createAuthor);
 router.get("/get-author-by-id", getAuthorById);
-router.put("update/:id", updateAuthorById)
-router.delete("delete/:id", deleteAuthorById)
+router.put("/update/:id", updateAuthor)
+router.delete("/delete/:id", deleteAuthor)
+
 
 module.exports = router;
